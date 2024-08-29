@@ -1,0 +1,49 @@
+*,
+*::after,
+*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 1px solid green;
+}
+:root{
+    --item-width:60vw;
+    
+}
+.carousel{
+    position: relative;
+    width: var(--item-width);
+    /* height: var(--item-width); */
+    overflow: hidden;
+    margin: auto;
+    margin-top: 1rem;
+    
+}
+.carousel ul{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+}
+.carousel ul li{
+    width: 100%;
+    height: 100%;
+}
+.carousel ul li img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.slide-in{
+
+}
+.slide-out{
+
+}
+.fade-in{
+
+}
+.fade-out{
+
+}
