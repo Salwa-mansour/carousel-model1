@@ -1,3 +1,8 @@
 // import './style.css'
 // import images from './images';
-console.log('hooo')
+import { carousel } from "./carousel";
+const carousel1 = document.querySelector('.carousel');
+const nextBtn = carousel1.querySelector('.next');
+
+
+carousel(carousel1,'500px')

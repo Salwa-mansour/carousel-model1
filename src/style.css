@@ -6,14 +6,14 @@
     box-sizing: border-box;
     outline: 1px solid green;
 }
-:root{
-    --item-width:60vw;
-    
-}
+/* :root{
+  
+} */
 .carousel{
+    --item-width:60vw;
     position: relative;
     width: var(--item-width);
-    /* height: var(--item-width); */
+    height: var(--item-width);
     overflow: hidden;
     margin: auto;
     margin-top: 1rem;
@@ -28,6 +28,10 @@
 .carousel ul li{
     width: 100%;
     height: 100%;
+    position: absolute;
+    opacity: .5;
+    transform: translateX(-98%);
+  
 }
 .carousel ul li img{
     width: 100%;
@@ -35,15 +39,45 @@
     object-fit: cover;
     object-position: center;
 }
-.slide-in{
-
+.slide-in,
+[data-animation="slide-in"]{
+   
+    animation:slide-in .5s ease-in-out forwards;
 }
-.slide-out{
-
+.slide-in-reverse,
+[data-animation="slide-in-reverse"]{
+    
+    animation:slide-in .5s ease-in-out reverse forwards;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+}
+.slide-out,
+[data-animation="slide-out"]{
+    animation:slide-out .5s ease-in-out forwards;
+}
+.slide-out-reverse,
+[data-animation="slide-out-reverse"]{
+    animation:slide-out .5s ease-in-out reverse forwards;
 }
 .fade-in{
 
 }
 .fade-out{
 
+}
+@keyframes slide-in {
+    0%{
+        transform: translateX(-98%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes slide-out {
+   
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(98%);
+    }
 }
