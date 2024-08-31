@@ -20,19 +20,20 @@ function carousel(container,itemWidth,containerWidth='100vw'){
     });
     function moveSlide(e){
         isSliding = true; 
-         
+     //   resetAnimation(); 
 
         const offset = e.target.dataset.carouselButton === "next" ? 1 : -1
         const activeSlide = slides.querySelector("[data-active]")
-         
+         console.log(activeSlide)
         let newIndex = [...slides.children].indexOf(activeSlide) + offset
         if (newIndex < 0) newIndex = slides.children.length - 1
         if (newIndex >= slides.children.length) newIndex = 0
 
         slides.children[newIndex].dataset.active = true
-        if(offset){//next
+        console.log(offset)
+        if(offset == 1){//next
             toNext();
-            console.log(isSliding)
+            console.log(activeSlide)
         }else{ //prev
             toPrev()
         }
@@ -41,27 +42,37 @@ function carousel(container,itemWidth,containerWidth='100vw'){
        
 
          function toNext(){
+            console.log(activeSlide.dataset)
             activeSlide.dataset.animation='slide-out';
+           //  delete activeSlide.dataset.active
             slides.children[newIndex].dataset.animation='slide-in';
          }
         function toPrev(){
-            activeSlide.dataset.animation='slide-out-reverse';
-            slides.children[newIndex].dataset.animation='slide-in-reverse';
+            activeSlide.dataset.animation='slide-in-reverse';//animate out of view
+         //    delete activeSlide.dataset.active
+            slides.children[newIndex].dataset.animation='slide-out-reverse';//animate in view
         }
         function resetAnimation(){
-       
-            let prevSlideIndex = [...slides.children].indexOf(activeSlide) - 1 ;
-            if (prevSlideIndex < 0) prevSlideIndex = slides.children.length - 1
-            if (prevSlideIndex >= slides.children.length) prevSlideIndex = 0
-    
-            console.log(prevSlideIndex)
-             slides.children[prevSlideIndex].dataset.animation=""
-             slides.children[prevSlideIndex].addEventListener('animationend',()=>{
-                delete slides.children[prevSlideIndex].dataset.animation
-             })
-             
-            delete activeSlide.dataset.animation
+            const resetSlides= container.querySelectorAll('.slide:not([data-active="true"])')
+            console.log(resetSlides)
+            resetSlides.forEach((slide)=>{
+                    slide.addEventListener('animationend',()=>{
+                        delete slide.dataset.animation
+                        
+                    }, { once: true })
+                  
+            })
             delete activeSlide.dataset.active
+            // let prevSlideIndex = [...slides.children].indexOf(activeSlide) - 1 ;
+            // if (prevSlideIndex < 0) prevSlideIndex = slides.children.length - 1
+            // if (prevSlideIndex >= slides.children.length) prevSlideIndex = 0
+    
+         //    slides.children[prevSlideIndex].addEventListener('animationend',()=>{
+            //    delete slides.children[prevSlideIndex].dataset.animation
+         //    })
+             
+            // delete activeSlide.dataset.animation
+            // delete activeSlide.dataset.active
         }
     }
 
